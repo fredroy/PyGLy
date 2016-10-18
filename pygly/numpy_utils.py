@@ -2,7 +2,7 @@
 """
 
 import numpy
-
+from functools import reduce 
 
 def dtype_stride( dtype, name = None ):
     """Returns the number of bytes in a single row of the

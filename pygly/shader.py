@@ -432,7 +432,7 @@ class Shader( object ):
 
         # retrieve the compile status
         if not GL.glGetShaderiv( self.handle, GL.GL_COMPILE_STATUS ):
-            errors = GL.glGetShaderInfoLog( self.handle )
+            errors = GL.glGetShaderInfoLog( self.handle ).decode("utf-8")
             self._print_shader_errors( errors )
 
             raise GLError( errors )
@@ -587,7 +587,7 @@ class ShaderProgram( object ):
 
         # retrieve the compile status
         if not GL.glGetProgramiv( self.handle, GL.GL_LINK_STATUS ):
-            errors = GL.glGetProgramInfoLog( self.handle )
+            errors = GL.glGetProgramInfoLog( self.handle ).decode("utf-8")
             self._print_shader_errors( errors )
 
             raise GLError( errors )

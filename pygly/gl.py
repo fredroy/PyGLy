@@ -65,7 +65,10 @@ def gl_version():
     """Returns the current OpenGL version string as specified by the
     OpenGL drivers.
     """
-    return GL.glGetString( GL.GL_VERSION )
+    version = GL.glGetString( GL.GL_VERSION )
+    if version == None:
+         version = "3.3"
+    return version
 
 def gl_version_tuple():
     return _extract_version( gl_version() )
@@ -85,7 +88,7 @@ def gl_profile():
 def glsl_version():
     """Returns the GLSL version string.
     """
-    return GL.glGetString( GL.GL_SHADING_LANGUAGE_VERSION )
+    return GL.glGetString( GL.GL_SHADING_LANGUAGE_VERSION ).decode("utf-8")
 
 def glsl_version_tuple():
     """Returns the GLSL version as a tuple.
@@ -114,11 +117,11 @@ def is_core():
 def print_gl_info():
     """Prints common OpenGL version information.
     """
-    print "OpenGL Information:"
+    print ("OpenGL Information:")
     for prop in ["GL_VENDOR", "GL_RENDERER", "GL_VERSION", "GL_SHADING_LANGUAGE_VERSION"]:
         type = getattr( GL, prop )
         value = GL.glGetString( type )
-        print "\t%s = %s" % (prop, value)
+        print ("\t%s = %s" % (prop, value))
 
 def string_to_type( type ):
     """Converts an OpenGL type from a string to an actual type.
